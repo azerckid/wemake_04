@@ -41,8 +41,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { Navigation } from "~/common/components/navigation";
+
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <Navigation />
+      <div className="">
+        <Outlet />
+      </div>
+    </>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
