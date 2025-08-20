@@ -5,9 +5,9 @@ export const userQuery = (id: string) =>
         queryKey: ["users", id],
         queryFn: () => ({
             id,
-            name: "Nico",
+            name: "Azer.C",
             avatar: "https://github.com/shadcn.png",
-            email: "nico@nomadcoders.co",
+            email: "azerckid@gmail.com",
             role: "admin",
         }),
     });
