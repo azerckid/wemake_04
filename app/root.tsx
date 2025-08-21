@@ -46,7 +46,11 @@ import { Navigation } from "~/common/components/navigation";
 export default function App() {
   return (
     <>
-      <Navigation />
+      <Navigation
+        isLoggedIn={true}
+        hasNotifications={false}
+        hasMessages={true}
+      />
       <div className="">
         <Outlet />
       </div>
