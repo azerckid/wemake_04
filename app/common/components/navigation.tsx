@@ -205,7 +205,7 @@ export function Navigation({
                         </Link>
                     </Button>
                     <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
+                        <DropdownMenuTrigger asChild className="cursor-pointer">
                             <Avatar>
                                 <AvatarImage src="https://github.com/shadcn.png" />
                                 <AvatarFallback>N</AvatarFallback>
