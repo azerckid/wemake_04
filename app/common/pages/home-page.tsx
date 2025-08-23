@@ -1,35 +1,60 @@
+import { type MetaFunction, Link } from "react-router";
 import { ProductCard } from "~/features/products/components/product-card";
+import { Button } from "~/common/components/ui/button";
+import { PostCard } from "~/features/community/components/post-card";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Home | wemake" },
+    { name: "description", content: "Welcome to wemake" },
+  ];
+};
 
 export default function HomePage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col gap-4">
-        {[
-          {
-            id: "1",
-            name: "Product 1",
-            description: "This is a great product that solves many problems",
-            commentsCount: 42,
-            viewsCount: 1234,
-            votesCount: 120,
-          },
-          {
-            id: "2",
-            name: "Product 2",
-            description: "Another amazing product with fantastic features",
-            commentsCount: 28,
-            viewsCount: 987,
-            votesCount: 89,
-          },
-        ].map((product) => (
+    <div className="px-20 space-y-40">
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">
+            Today's Products
+          </h2>
+          <p className="text-xl font-light text-foreground">
+            The best products made by our community today.
+          </p>
+        </div>
+        {Array.from({ length: 10 }).map((_, index) => (
           <ProductCard
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            description={product.description}
-            commentsCount={product.commentsCount}
-            viewsCount={product.viewsCount}
-            votesCount={product.votesCount}
+            key={`productId-${index}`}
+            id={`productId-${index}`}
+            name="Product Name"
+            description="Product Description"
+            commentsCount={12}
+            viewsCount={12}
+            votesCount={120}
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">
+            Latest Discussions
+          </h2>
+          <p className="text-xl font-light text-foreground">
+            The latest discussions from our community.
+          </p>
+          <Button variant="link" asChild className="text-lg p-0">
+            <Link to="/community">Explore all discussions &rarr;</Link>
+          </Button>
+        </div>
+        {Array.from({ length: 11 }).map((_, index) => (
+          <PostCard
+            key={`postId-${index}`}
+            id={`postId-${index}`}
+            title="What is the best productivity tool?"
+            author="Nico"
+            authorAvatarUrl="https://github.com/apple.png"
+            category="Productivity"
+            postedAt="12 hours ago"
           />
         ))}
       </div>
