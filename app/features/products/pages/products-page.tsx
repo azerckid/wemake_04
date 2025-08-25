@@ -9,9 +9,7 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  return {
-    products: [], // Add products fetch logic
-  };
+  return { hello: "world" };
 }
 
 export default function ProductsPage() {
