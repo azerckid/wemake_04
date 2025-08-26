@@ -1,5 +1,4 @@
-import { useLoaderData, type LoaderFunctionArgs } from "react-router";
-import type { MetaFunction } from "react-router";
+import { useLoaderData, type LoaderFunctionArgs, type MetaFunction } from "react-router";
 
 export const meta: MetaFunction = () => {
   return [

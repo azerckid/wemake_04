@@ -1,4 +1,5 @@
-import { type MetaFunction, Link, useLoaderData } from "react-router";
+import { Link } from "react-router";
+import { useLoaderData, type LoaderFunctionArgs, type MetaFunction } from "react-router";
 
 import { ProductCard } from "~/features/products/components/product-card";
 import { PostCard } from "~/features/community/components/post-card";
@@ -14,7 +15,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader = () => {
+export async function loader({ request }: LoaderFunctionArgs) {
   console.log("hello");
   return {
     hello: "world",
