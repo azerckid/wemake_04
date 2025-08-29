@@ -39,11 +39,6 @@ export default function LeaderboardPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-3xl font-bold">Daily</h2>
-            <Button variant="link" asChild>
-              <Link to="/products/leaderboards/daily">
-                View all daily &rarr;
-              </Link>
-            </Button>
           </div>
           <div className="grid grid-cols-3 gap-4">
             {Array.from({ length: 7 }).map((_, index) => (
@@ -69,11 +64,6 @@ export default function LeaderboardPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-3xl font-bold">Weekly</h2>
-            <Button variant="link" asChild>
-              <Link to="/products/leaderboards/weekly">
-                View all weekly &rarr;
-              </Link>
-            </Button>
           </div>
           <div className="grid grid-cols-3 gap-4">
             {Array.from({ length: 7 }).map((_, index) => (
@@ -99,11 +89,6 @@ export default function LeaderboardPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-3xl font-bold">Monthly</h2>
-            <Button variant="link" asChild>
-              <Link to="/products/leaderboards/monthly">
-                View all monthly &rarr;
-              </Link>
-            </Button>
           </div>
           <div className="grid grid-cols-3 gap-4">
             {Array.from({ length: 7 }).map((_, index) => (
@@ -129,11 +114,6 @@ export default function LeaderboardPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-3xl font-bold">Yearly</h2>
-            <Button variant="link" asChild>
-              <Link to="/products/leaderboards/yearly">
-                View all yearly &rarr;
-              </Link>
-            </Button>
           </div>
           <div className="grid grid-cols-3 gap-4">
             {Array.from({ length: 7 }).map((_, index) => (
