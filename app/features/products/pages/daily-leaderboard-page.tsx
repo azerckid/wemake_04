@@ -1,4 +1,4 @@
-import { data, isRouteErrorResponse, Link, useLoaderData, type LoaderFunctionArgs } from "react-router";
+import { data, isRouteErrorResponse, Link, useLoaderData, type LoaderFunctionArgs, type MetaFunction } from "react-router";
 import { DateTime } from "luxon";
 import { z } from "zod";
 import { Hero } from "~/common/components/hero";
@@ -11,6 +11,23 @@ const paramsSchema = z.object({
   month: z.coerce.number(),
   day: z.coerce.number(),
 });
+
+export const meta: MetaFunction = ({ params }) => {
+  const date = DateTime.fromObject({
+    year: Number(params.year),
+    month: Number(params.month),
+    day: Number(params.day),
+  })
+    .setZone("Asia/Seoul")
+    .setLocale("ko");
+  return [
+    {
+      title: `The best products of ${date.toLocaleString(
+        DateTime.DATE_MED
+      )} | wemake`,
+    },
+  ];
+};
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { success, data: parsedData } = paramsSchema.safeParse(params);
