@@ -45,7 +45,7 @@ export default function SearchPage({ loaderData }: Route.ComponentProps) {
         />
         <Button type="submit">Search</Button>
       </Form>
-      <div className="space-y-5 w-full max-w-screen-md mx-auto">
+      <div className="space-y-5 w-full max-w-3xl mx-auto">
         {Array.from({ length: 11 }).map((_, index) => (
           <ProductCard
             key={`productId-${index}`}
