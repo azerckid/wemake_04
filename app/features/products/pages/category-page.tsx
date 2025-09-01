@@ -1,9 +1,9 @@
+import { type MetaFunction } from "react-router";
 import { Hero } from "~/common/components/hero";
 import { ProductCard } from "../components/product-card";
 import ProductPagination from "~/common/components/product-pagination";
-import type { Route } from "./+types/category-page";
 
-export const meta = ({ params }: Route.MetaArgs) => {
+export const meta: MetaFunction = ({ params }) => {
   return [
     { title: `Developer Tools | ProductHunt Clone` },
     { name: "description", content: `Browse Developer Tools products` },
