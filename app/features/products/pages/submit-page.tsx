@@ -1,18 +1,18 @@
-import type { Route } from "./+types/submit-page";
+import { type MetaFunction } from "react-router";
 import { Form } from "react-router";
+
 import { Hero } from "~/common/components/hero";
 import InputPair from "~/common/components/input-pair";
 import SelectPair from "~/common/components/select-pair";
 
-export const meta: Route.MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [
     { title: "Submit Product | wemake" },
     { name: "description", content: "Submit your product" },
   ];
 };
 
-export default function SubmitPage({ actionData }: Route.ComponentProps) {
-  // actionData is available but not used yet
+export default function SubmitPage() {
   return (
     <div>
       <Hero
