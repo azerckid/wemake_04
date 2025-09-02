@@ -1,9 +1,13 @@
 import { type MetaFunction } from "react-router";
 import { Form } from "react-router";
+import { useState } from "react";
 
 import { Hero } from "~/common/components/hero";
 import InputPair from "~/common/components/input-pair";
 import SelectPair from "~/common/components/select-pair";
+import { Button } from "~/common/components/ui/button";
+import { Input } from "~/common/components/ui/input";
+import { Label } from "~/common/components/ui/label";
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,6 +17,14 @@ export const meta: MetaFunction = () => {
 };
 
 export default function SubmitPage() {
+  const [icon, setIcon] = useState<string | null>(null);
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const file = event.target.files[0];
+      setIcon(URL.createObjectURL(file));
+    }
+  };
+
   return (
     <div>
       <Hero
@@ -70,6 +82,49 @@ export default function SubmitPage() {
               { label: "Development", value: "development" },
             ]}
           />
+          <Button type="submit" className="w-full" size="lg">
+            Submit
+          </Button>
+        </div>
+        <div className="flex flex-col space-y-2">
+          <div className="size-40 rounded-xl shadow-xl overflow-hidden ">
+            {icon ? (
+              <img src={icon} className="object-cover w-full h-full" />
+            ) : null}
+          </div>
+          <Label className="flex flex-col gap-1">
+            Icon
+            <small className="text-muted-foreground">
+              This is the icon of your product.
+            </small>
+          </Label>
+          <Input
+            type="file"
+            className="w-1/2"
+            onChange={onChange}
+            required
+            name="icon"
+            style={{
+              paddingLeft: "12px",
+              paddingRight: "12px",
+              verticalAlign: "middle",
+              textAlign: "right",
+              gap: "0px",
+              width: "210px",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              height: "31px",
+            }}
+          />
+          <div className="flex flex-col text-xs">
+            <span className=" text-muted-foreground">
+              Recommended size: 128x128px
+            </span>
+            <span className=" text-muted-foreground">
+              Allowed formats: PNG, JPEG
+            </span>
+            <span className=" text-muted-foreground">Max file size: 1MB</span>
+          </div>
         </div>
       </Form>
     </div>
