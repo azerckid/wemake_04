@@ -2,12 +2,12 @@ import { type MetaFunction } from "react-router";
 import { Form } from "react-router";
 import { useState } from "react";
 
-import { Hero } from "~/common/components/hero";
 import InputPair from "~/common/components/input-pair";
 import SelectPair from "~/common/components/select-pair";
-import { Button } from "~/common/components/ui/button";
+import { Hero } from "~/common/components/hero";
 import { Input } from "~/common/components/ui/input";
 import { Label } from "~/common/components/ui/label";
+import { Button } from "~/common/components/ui/button";
 
 export const meta: MetaFunction = () => {
   return [
@@ -113,7 +113,7 @@ export default function SubmitPage() {
               width: "210px",
               justifyContent: "flex-start",
               alignItems: "flex-start",
-              height: "31px",
+              height: "32px",
             }}
           />
           <div className="flex flex-col text-xs">
