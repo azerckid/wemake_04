@@ -113,7 +113,7 @@ export default function SubmitPage() {
               width: "210px",
               justifyContent: "flex-start",
               alignItems: "flex-start",
-              height: "32px",
+              height: "31px",
             }}
           />
           <div className="flex flex-col text-xs">
