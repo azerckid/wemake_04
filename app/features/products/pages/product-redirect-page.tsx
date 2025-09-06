@@ -1,7 +1,6 @@
-import type { Route } from "./+types/product-redirect-page";
-import { redirect } from "react-router";
+import { redirect, type LoaderFunctionArgs } from "react-router";
 
-export const loader = ({ params }: Route.LoaderArgs) => {
+export const loader = ({ params }: LoaderFunctionArgs) => {
   return redirect(`/products/${params.productId}/overview`);
 };
 

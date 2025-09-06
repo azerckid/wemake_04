@@ -1,11 +1,13 @@
+import type { Route } from "./+types/product-overview-layout";
+
+import { NavLink, Outlet } from "react-router";
 import { StarIcon } from "lucide-react";
 import { ChevronUpIcon } from "lucide-react";
-import { NavLink, Outlet, useParams } from "react-router";
 import { Button, buttonVariants } from "~/common/components/ui/button";
 import { cn } from "~/lib/utils";
 
-export default function ProductOverviewLayout() {
-  const { productId } = useParams();
+export default function ProductOverviewLayout({ params }: Route.ComponentProps) {
+  const { productId } = params;
   return (
     <div className="space-y-10">
       <div className="flex justify-between">

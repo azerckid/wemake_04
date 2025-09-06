@@ -1,5 +1,5 @@
 import type { Route } from "./+types/product-reviews-page";
-import type { MetaFunction } from "react-router";
+import type { MetaFunction, LoaderFunctionArgs } from "react-router";
 
 interface LoaderData {
   productId: string;
@@ -10,7 +10,7 @@ interface LoaderData {
   }>;
 }
 
-export function loader({ params }: Route.LoaderArgs) {
+export function loader({ params }: LoaderFunctionArgs) {
   // In a real app, you would fetch reviews from your database
   return {
     productId: params.productId,
