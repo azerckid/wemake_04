@@ -31,12 +31,11 @@ export default function ProductOverviewLayout({ params }: Route.ComponentProps) 
         <Button
           variant={"secondary"}
           size="lg"
-          className="text-lg px-10"
-          style={{ height: "40px" }}
+          className="text-lg h-14 px-10"
         >
           Visit Website
         </Button>
-        <Button size="lg" className="text-lg h-14 px-10" style={{ height: "40px" }}>
+        <Button size="lg" className="text-lg h-14 px-10">
           <ChevronUpIcon className="size-4" />
           Upvote (100)
         </Button>
