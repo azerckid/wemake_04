@@ -1,13 +1,15 @@
-import { z } from "zod";
+import { useLoaderData, type LoaderFunctionArgs, type MetaFunction } from "react-router";
+import { Form } from "react-router";
 import type { Route } from "./+types/search-page";
+
+import { z } from "zod";
 import { Hero } from "~/common/components/hero";
 import { ProductCard } from "../components/product-card";
 import ProductPagination from "~/common/components/product-pagination";
-import { Form } from "react-router";
 import { Input } from "~/common/components/ui/input";
 import { Button } from "~/common/components/ui/button";
 
-export const meta: Route.MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [
     { title: "Search Products | wemake" },
     { name: "description", content: "Search for products" },
@@ -19,7 +21,7 @@ const paramsSchema = z.object({
   page: z.coerce.number().optional().default(1),
 });
 
-export function loader({ request }: Route.LoaderArgs) {
+export const loader = ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const { success, data: parsedData } = paramsSchema.safeParse(
     Object.fromEntries(url.searchParams)
@@ -30,7 +32,8 @@ export function loader({ request }: Route.LoaderArgs) {
   return parsedData;
 }
 
-export default function SearchPage({ loaderData }: Route.ComponentProps) {
+export default function SearchPage({ }: Route.ComponentProps) {
+  const loaderData = useLoaderData<typeof loader>();
   return (
     <div className="space-y-10">
       <Hero
