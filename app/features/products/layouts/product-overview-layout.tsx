@@ -31,11 +31,11 @@ export default function ProductOverviewLayout({ params }: Route.ComponentProps) 
         <Button
           variant={"secondary"}
           size="lg"
-          className="text-lg h-14 px-10"
+          className="text-lg h-10 px-10"
         >
           Visit Website
         </Button>
-        <Button size="lg" className="text-lg h-14 px-10">
+        <Button size="lg" className="text-lg h-10 px-10">
           <ChevronUpIcon className="size-4" />
           Upvote (100)
         </Button>
