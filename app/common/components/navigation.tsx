@@ -119,6 +119,21 @@ const menus = [
             },
         ],
     },
+    {
+        name: "Ideas",
+        to: "/ideas",
+    },
+    {
+        name: "Teams",
+        to: "/teams",
+        items: [
+            {
+                name: "All Teams",
+                description: "See all teams in our community",
+                to: "/teams",
+            },
+        ],
+    },
 ];
 
 export function Navigation({
