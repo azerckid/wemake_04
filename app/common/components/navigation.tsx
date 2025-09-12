@@ -151,7 +151,7 @@ export function Navigation({
                 <Link to="/" className="text-xl font-bold tracking-tighter">
                     wemake
                 </Link>
-                <Separator orientation="vertical" className="!h-6 block bg-border" />
+                <Separator orientation="vertical" className="h-6! block bg-border" />
                 <NavigationMenu>
                     <NavigationMenuList>
                         {menus.map((menu) => (

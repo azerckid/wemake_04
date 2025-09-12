@@ -1,7 +1,6 @@
 import type { Route } from "./+types/product-overview-page";
-import type { MetaFunction } from "react-router";
 
-export const meta: MetaFunction = () => {
+export function meta() {
   return [
     { title: "Product Overview" },
     { name: "description", content: "View product details and information" },
