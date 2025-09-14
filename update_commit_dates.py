@@ -5,9 +5,9 @@ import os
 import tempfile
 from datetime import datetime, timedelta
 
-# 가장 오래된 커밋이 2025-08-18 01:28:08이 되도록 설정
-START_DATE = datetime(2025, 8, 18, 1, 28, 8)
-HOURS_INTERVAL = 12
+# 가장 오래된 커밋이 2025-09-07 01:28:08이 되도록 설정
+START_DATE = datetime(2025, 9, 7, 1, 28, 8)
+HOURS_INTERVAL = 24
 
 print("커밋 목록을 가져오는 중...")
 
@@ -28,15 +28,45 @@ if has_remote:
     try:
         # 원격 브랜치 정보 가져오기
         subprocess.run(['git', 'fetch', 'origin'], check=False, capture_output=True)
-        result = subprocess.run(
-            ['git', 'log', 'origin/main..HEAD', '--reverse', '--format=%H'],
+        
+        # 현재 브랜치 확인
+        current_branch = subprocess.run(
+            ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
             capture_output=True,
             text=True,
             check=True
+        ).stdout.strip()
+        
+        # 원격 브랜치 확인 (origin/main 또는 origin/현재브랜치)
+        remote_branch = f'origin/{current_branch}'
+        check_remote = subprocess.run(
+            ['git', 'rev-parse', '--verify', remote_branch],
+            capture_output=True,
+            text=True,
+            check=False
         )
-        commits = [c for c in result.stdout.strip().split('\n') if c]
-    except subprocess.CalledProcessError:
-        print("⚠️  원격 브랜치를 찾을 수 없습니다. 모든 커밋을 대상으로 합니다.")
+        
+        if check_remote.returncode == 0:
+            # 원격 브랜치가 있으면 푸시되지 않은 커밋만 가져오기
+            result = subprocess.run(
+                ['git', 'log', f'{remote_branch}..HEAD', '--reverse', '--format=%H'],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            commits = [c for c in result.stdout.strip().split('\n') if c]
+        else:
+            # 원격 브랜치가 없으면 모든 커밋 대상
+            print(f"⚠️  원격 브랜치 {remote_branch}를 찾을 수 없습니다. 모든 커밋을 대상으로 합니다.")
+            result = subprocess.run(
+                ['git', 'log', '--reverse', '--format=%H'],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            commits = [c for c in result.stdout.strip().split('\n') if c]
+    except subprocess.CalledProcessError as e:
+        print(f"⚠️  원격 브랜치를 찾을 수 없습니다. 모든 커밋을 대상으로 합니다. (에러: {e})")
         # 모든 커밋 가져오기
         result = subprocess.run(
             ['git', 'log', '--reverse', '--format=%H'],
@@ -91,8 +121,8 @@ env_filter_script = f'''#!/usr/bin/env python3
 import sys
 from datetime import datetime, timedelta
 
-START_DATE = datetime(2025, 8, 18, 1, 28, 8)
-HOURS_INTERVAL = 12
+START_DATE = datetime(2025, 9, 7, 1, 28, 8)
+HOURS_INTERVAL = 24
 COMMITS = {commits}
 TOTAL = {total}
 
@@ -110,15 +140,20 @@ except (ValueError, IndexError):
 # 임시 파일에 Python 스크립트 작성 (더 안전한 방법)
 temp_dir = tempfile.gettempdir()
 temp_file = os.path.join(temp_dir, 'calc_date.py')
-with open(temp_file, 'w') as f:
-    f.write(env_filter_script)
-
-# 실행 권한 부여
-os.chmod(temp_file, 0o755)
+try:
+    with open(temp_file, 'w', encoding='utf-8') as f:
+        f.write(env_filter_script)
+    # 실행 권한 부여
+    os.chmod(temp_file, 0o755)
+except Exception as e:
+    print(f"❌ 임시 파일 생성 실패: {e}")
+    sys.exit(1)
 
 # git filter-branch 실행
+# 임시 파일 경로를 안전하게 처리 (공백/특수문자 대응)
+temp_file_escaped = temp_file.replace("'", "'\"'\"'")
 env_filter = f'''commit_hash="$GIT_COMMIT"
-new_date=$(python3 {temp_file} "$commit_hash")
+new_date=$(python3 '{temp_file_escaped}' "$commit_hash")
 if [ -n "$new_date" ]; then
     export GIT_AUTHOR_DATE="$new_date"
     export GIT_COMMITTER_DATE="$new_date"
