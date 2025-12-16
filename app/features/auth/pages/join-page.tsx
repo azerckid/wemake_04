@@ -14,7 +14,7 @@ export default function JoinPage() {
       <Button variant={"ghost"} asChild className="absolute right-8 top-8 ">
         <Link to="/auth/login">Login</Link>
       </Button>
-      <div className="flex items-center flex-col justify-center w-full max-w-md gap-10">
+      <div className="flex items-center flex-col justify-center w-full max-w-md gap-2">
         <h1 className="text-2xl font-semibold">Create an account</h1>
         <Form className="w-full space-y-4">
           <InputPair
