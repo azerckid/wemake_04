@@ -2,6 +2,7 @@ import type { MetaFunction } from "react-router";
 import { Form, Link } from "react-router";
 import { Button } from "~/common/components/ui/button";
 import InputPair from "~/common/components/input-pair";
+import AuthButtons from "../components/auth-buttons";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Login | wemake" }];
@@ -38,6 +39,7 @@ export default function LoginPage() {
             Log in
           </Button>
         </Form>
+        <AuthButtons />
       </div>
     </div>
   );
