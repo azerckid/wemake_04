@@ -1,12 +1,14 @@
-import { Hero } from "~/common/components/hero";
-import type { Route } from "./+types/submit-job-page";
+import type { MetaFunction } from "react-router";
 import { Form } from "react-router";
+
+import { Hero } from "~/common/components/hero";
 import InputPair from "~/common/components/input-pair";
 import SelectPair from "~/common/components/select-pair";
-import { JOB_TYPES, LOCATION_TYPES, SALARY_RANGE } from "../constants";
 import { Button } from "~/common/components/ui/button";
 
-export const meta: Route.MetaFunction = () => {
+import { JOB_TYPES, LOCATION_TYPES, SALARY_RANGE } from "../constants";
+
+export const meta: MetaFunction = () => {
   return [
     { title: "Post a Job | wemake" },
     {
@@ -23,6 +25,7 @@ export default function SubmitJobPage() {
         title="Post a Job"
         subtitle="Reach out to the best developers in the world"
       />
+
       <Form className="max-w-screen-2xl flex flex-col items-center gap-10 mx-auto">
         <div className="grid grid-cols-3 w-full gap-10">
           <InputPair
@@ -33,7 +36,57 @@ export default function SubmitJobPage() {
             type="text"
             id="position"
             required
-            placeholder="i.e Software Engineer"
+            placeholder="i.e Senior React Developer"
+          />
+          <InputPair
+            id="overview"
+            label="Overview"
+            description="(400 characters max)"
+            name="overview"
+            maxLength={400}
+            required
+            placeholder="i.e We are looking for a Senior React Developer"
+            textArea
+          />
+          <InputPair
+            id="responsibilities"
+            label="Responsibilities"
+            description="(400 characters max, comma separated)"
+            name="responsibilities"
+            maxLength={400}
+            required
+            placeholder="i.e Implement new features, Maintain code quality, etc."
+            textArea
+          />
+          <InputPair
+            id="qualifications"
+            label="Qualifications"
+            description="(400 characters max, comma separated)"
+            name="qualifications"
+            maxLength={400}
+            required
+            placeholder="i.e 3+ years of experience, Strong TypeScript skills, etc."
+            textArea
+          />
+          <InputPair
+            id="benefits"
+            label="Benefits"
+            description="(400 characters max, comma separated)"
+            name="benefits"
+            maxLength={400}
+            required
+            placeholder="i.e Flexible working hours, Health insurance, etc."
+            textArea
+          />
+          <InputPair
+            id="skills"
+            label="Skills"
+            description="(400 characters max, comma separated)"
+            name="skills"
+            maxLength={400}
+            required
+            placeholder="i.e React, TypeScript, etc."
+            textArea
           />
           <InputPair
             id="companyName"
